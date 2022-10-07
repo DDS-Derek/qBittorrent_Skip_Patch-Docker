@@ -24,7 +24,7 @@ ENV TZ=Asia/Shanghai \
     UT=true
 
 COPY root /
-COPY --from=build --chmod=777 /build/qbt-build/bin/qbittorrent-nox   /usr/local/bin/qbittorrent-nox
+COPY --from=build --chmod=777 /build/qbt-build/completed/qbittorrent-nox   /usr/local/bin/qbittorrent-nox
 
 RUN  apk add --no-cache python3 \
 &&   rm -rf /var/cache/apk/*   \
