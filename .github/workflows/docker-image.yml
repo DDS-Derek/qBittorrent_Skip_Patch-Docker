@@ -1,11 +1,11 @@
-name: Build qBittorrent_Skip_Satch-base
+name: Build qBittorrent_Skip_Satch
 
 on:
   workflow_dispatch:
 
 jobs:
   build1:
-    name: amd64-base
+    name: amd64
     runs-on: ubuntu-latest
     steps:
       - 
@@ -34,10 +34,10 @@ jobs:
             linux/amd64
           push: true
           tags: |
-             ${{ secrets.DOCKER_USERNAME }}/qbittorrent_skip_patch:base-amd64
+             ${{ secrets.DOCKER_USERNAME }}/qbittorrent_skip_patch:amd64
 
   build2:
-    name: arm64-base
+    name: arm64
     runs-on: ubuntu-latest
     steps:
       - 
@@ -66,4 +66,4 @@ jobs:
             linux/arm64
           push: true
           tags: |
-             ${{ secrets.DOCKER_USERNAME }}/qbittorrent_skip_patch:base-arm64
+             ${{ secrets.DOCKER_USERNAME }}/qbittorrent_skip_patch:arm64
