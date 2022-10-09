@@ -14,7 +14,7 @@ qBittorrent快速校验版本
 ```
 version: "2"
 services:
-  qbittorrentee:
+  qbittorrent:
     image: ddsderek/qbittorrent_skip_patch
     container_name: qbittorrent_skip_patch
     environment:
