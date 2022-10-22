@@ -1,15 +1,13 @@
-FROM ubuntu:20.04 AS build
+##################################
+ARG qbitorrent_tag=4.4.0
+ARG libtorrent_tag=LPE_v0.4
+##################################
 
-ENV qbitorrent_tag=4.4.0
-ENV libtorrent_tag=LPE_v0.4
+FROM ddsderek/qbittorrent_skip_patch:build_base AS build
 
-RUN apt-get update -y && \
-    apt-get install wget bash -y && \
-    mkdir /build && \
-    cd /build && \
-    wget https://raw.githubusercontent.com/ChisBread/qbittorrent_skip_patch/main/qbittorrent-nox-static.sh && \
-    bash /build/qbittorrent-nox-static.sh all -i && \
-    qbitorrent_github_tag=release-${qbitorrent_tag} \
+WORKDIR /build
+
+RUN qbitorrent_github_tag=release-${qbitorrent_tag} \
     libtorrent_github_tag=${libtorrent_tag} \
     bash qbittorrent-nox-static.sh qbittorrent
 
