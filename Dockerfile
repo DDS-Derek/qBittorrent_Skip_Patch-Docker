@@ -1,9 +1,9 @@
-##################################
-ARG qbitorrent_tag=4.4.0
-ARG libtorrent_tag=LPE_v0.4
-##################################
-
 FROM ddsderek/qbittorrent_skip_patch:build_base AS build
+
+##################################
+ENV qbitorrent_tag=4.4.0
+ENV libtorrent_tag=LPE_v0.4
+##################################
 
 WORKDIR /build
 
@@ -21,12 +21,11 @@ ENV TZ=Asia/Shanghai \
     TL=https://githubraw.sleele.workers.dev/XIU2/TrackersListCollection/master/best.txt \
     UT=true
 
-COPY root /
-COPY --from=build --chmod=777 /build/qbt-build/completed/qbittorrent-nox   /usr/local/bin/qbittorrent-nox
+RUN apk add --no-cache python3 && \
+    rm -rf /var/cache/apk/*
 
-RUN  apk add --no-cache python3 \
-&&   rm -rf /var/cache/apk/*   \
-&&   chmod a+x  /usr/local/bin/qbittorrent-nox  
+COPY --chmod=755 root /
+COPY --from=build --chmod=a+x /build/qbt-build/completed/qbittorrent-nox   /usr/local/bin/qbittorrent-nox
 
 VOLUME /config
 
