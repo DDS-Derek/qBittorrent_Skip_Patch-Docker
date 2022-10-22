@@ -1,6 +1,6 @@
 FROM ubuntu:20.04 AS build
 
-ENV qbitorrent_tag=4.3.9
+ENV qbitorrent_tag=4.4.0
 ENV libtorrent_tag=LPE_v0.4
 
 RUN apt-get update -y && \
