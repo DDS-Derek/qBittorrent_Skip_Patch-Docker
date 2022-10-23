@@ -32,7 +32,6 @@ jobs:
           file: Dockerfile-build-base
           platforms: |
             linux/amd64
-            linux/arm64
           push: true
           tags: |
              ${{ secrets.DOCKER_USERNAME }}/qbittorrent_skip_patch:build_base
