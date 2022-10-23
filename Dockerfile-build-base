@@ -1,6 +1,7 @@
-FROM alpine:3.16
+FROM debian:10.12-slim
 
-RUN apk add wget bash && \
+RUN apt-get update -y && \
+    apt-get install wget bash -y && \
     mkdir /build && \
     cd /build && \
     wget https://raw.githubusercontent.com/ChisBread/qbittorrent_skip_patch/main/qbittorrent-nox-static.sh && \
