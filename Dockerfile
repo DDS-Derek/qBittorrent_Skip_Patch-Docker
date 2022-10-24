@@ -1,7 +1,7 @@
 FROM ddsderek/qbittorrent_skip_patch:build_base AS build
 
 ##################################
-ENV qbitorrent_tag=4.4.0
+ENV qbitorrent_tag=4.4.5
 ENV libtorrent_tag=LPE_v0.4
 ##################################
 
