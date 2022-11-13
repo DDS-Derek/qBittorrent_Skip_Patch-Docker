@@ -22,4 +22,5 @@ RUN qbitorrent_github_tag=release-${qbitorrent_tag} \
 
 FROM nevinee/qbittorrent:${qbitorrent_tag}
 
-COPY --from=build --chmod=a+x /build/qbt-build/completed/qbittorrent-nox   /usr/local/bin/qbittorrent-nox
+COPY --from=chisbread/qbittorrent:v4.3.9 --chmod=a+x /usr/bin/qbittorrent-nox   /usr/bin/qbittorrent-nox
+# COPY --from=build --chmod=a+x /build/qbt-build/completed/qbittorrent-nox   /usr/bin/qbittorrent-nox
