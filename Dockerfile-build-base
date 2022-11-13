@@ -24,4 +24,4 @@ RUN bash qbittorrent-nox-static.sh libtorrent
 RUN bash qbittorrent-nox-static.sh double_conversion
 RUN bash qbittorrent-nox-static.sh qtbase -i
 RUN bash qbittorrent-nox-static.sh qttools
-RUN qbitorrent_github_tag=release-${qbitorrent_tag} libtorrent_github_tag=${libtorrent_tag} bash /build/qbittorrent-nox-static.sh qbittorrent
+#RUN qbitorrent_github_tag=release-${qbitorrent_tag} libtorrent_github_tag=${libtorrent_tag} bash /build/qbittorrent-nox-static.sh qbittorrent
