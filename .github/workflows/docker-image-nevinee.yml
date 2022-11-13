@@ -1,4 +1,4 @@
-name: Build qBittorrent_Skip_Satch
+name: Build qBittorrent_Skip_Satch nevinee
 
 on:
     release:
