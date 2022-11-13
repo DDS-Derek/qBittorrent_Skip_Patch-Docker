@@ -6,7 +6,6 @@ on:
 
 jobs:
   build1:
-    if: contains(steps.set-version.outputs.version, 'nevinee')
     name: amd64
     runs-on: ubuntu-latest
     steps:
@@ -34,6 +33,7 @@ jobs:
 
       - 
         name: Buildx
+        if: contains(steps.set-version.outputs.version, 'nevinee')
         uses: docker/build-push-action@v3
         with:
           context: .
@@ -49,7 +49,6 @@ jobs:
 
   job5:
     needs: [build1]
-    if: contains(steps.set-version.outputs.version, 'nevinee')
     name: 更新DockerHub介绍
     runs-on: ubuntu-latest
     steps:
@@ -81,6 +80,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Docker Hub Description
+        if: contains(steps.set-version.outputs.version, 'nevinee')
         uses: peter-evans/dockerhub-description@v2
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
