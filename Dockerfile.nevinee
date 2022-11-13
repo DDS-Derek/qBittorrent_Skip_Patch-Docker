@@ -1,0 +1,25 @@
+##################################
+ARG qbitorrent_tag=4.3.9
+ARG libtorrent_tag=LPE_v0.4
+##################################
+
+FROM ddsderek/qbittorrent_skip_patch:build_base AS build
+
+##################################
+ARG qbitorrent_tag=4.3.9
+ARG libtorrent_tag=LPE_v0.4
+##################################
+
+WORKDIR /build
+
+RUN echo ${qbitorrent_tag} && \
+    echo ${libtorrent_tag} && \
+    sleep 10
+
+RUN qbitorrent_github_tag=release-${qbitorrent_tag} \
+    libtorrent_github_tag=${libtorrent_tag} \
+    bash qbittorrent-nox-static.sh qbittorrent
+
+FROM nevinee/qbittorrent:${qbitorrent_tag}
+
+COPY --from=build --chmod=a+x /build/qbt-build/completed/qbittorrent-nox   /usr/local/bin/qbittorrent-nox
