@@ -7,5 +7,21 @@ RUN apt-get update -y && \
     apt-get install wget bash -y && \
     mkdir /build && \
     cd /build && \
-    wget https://raw.githubusercontent.com/ChisBread/qbittorrent_skip_patch/main/qbittorrent-nox-static.sh && \
-    qbitorrent_github_tag=release-${qbitorrent_tag} libtorrent_github_tag=${libtorrent_tag} bash /build/qbittorrent-nox-static.sh all -i
+    wget https://raw.githubusercontent.com/ChisBread/qbittorrent_skip_patch/main/qbittorrent-nox-static.sh
+    
+WORKDIR /build
+
+RUN bash qbittorrent-nox-static.sh -bs-a
+RUN bash qbittorrent-nox-static.sh bison
+RUN bash qbittorrent-nox-static.sh gawk
+RUN bash qbittorrent-nox-static.sh glibc
+RUN bash qbittorrent-nox-static.sh zlib
+RUN bash qbittorrent-nox-static.sh iconv
+RUN bash qbittorrent-nox-static.sh icu
+RUN bash qbittorrent-nox-static.sh openssl
+RUN bash qbittorrent-nox-static.sh boost
+RUN bash qbittorrent-nox-static.sh libtorrent
+RUN bash qbittorrent-nox-static.sh double_conversion
+RUN bash qbittorrent-nox-static.sh qtbase -i
+RUN bash qbittorrent-nox-static.sh qttools
+RUN qbitorrent_github_tag=release-${qbitorrent_tag} libtorrent_github_tag=${libtorrent_tag} bash /build/qbittorrent-nox-static.sh qbittorrent
