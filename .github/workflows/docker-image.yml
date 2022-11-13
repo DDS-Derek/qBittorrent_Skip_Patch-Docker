@@ -6,7 +6,7 @@ on:
 
 jobs:
   build1:
-    if: "!contains(steps.prepare.outputs.version, 'nevinee')"
+    if: "!contains(steps.set-version.outputs.version, 'nevinee')"
     name: amd64
     runs-on: ubuntu-latest
     steps:
@@ -49,7 +49,7 @@ jobs:
 
   job5:
     needs: [build1]
-    if: "!contains(steps.prepare.outputs.version, 'nevinee')"
+    if: "!contains(steps.set-version.outputs.version, 'nevinee')"
     name: 更新DockerHub介绍
     runs-on: ubuntu-latest
     steps:
