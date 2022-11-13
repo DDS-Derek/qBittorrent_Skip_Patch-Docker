@@ -44,7 +44,7 @@ jobs:
           build-args: |
             VERSION=${{ steps.set-version.outputs.version }}
           tags: |
-             ${{ secrets.DOCKER_USERNAME }}/qbittorrent_skip_patch:${{ steps.set-version.outputs.version }}_nevinee
+             ${{ secrets.DOCKER_USERNAME }}/qbittorrent_skip_patch:${{ steps.set-version.outputs.version }}
              ${{ secrets.DOCKER_USERNAME }}/qbittorrent_skip_patch:latest_nevinee
 
   job5:
