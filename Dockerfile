@@ -1,15 +1,15 @@
-FROM ddsderek/qbittorrent_skip_patch:build_base AS build
+#FROM ddsderek/qbittorrent_skip_patch:build_base AS build
 
 ##################################
-ENV qbitorrent_tag=4.4.5
-ENV libtorrent_tag=LPE_v0.4
+#ENV qbitorrent_tag=4.4.5
+#ENV libtorrent_tag=LPE_v0.4
 ##################################
 
-WORKDIR /build
+#WORKDIR /build
 
-RUN qbitorrent_github_tag=release-${qbitorrent_tag} \
-    libtorrent_github_tag=${libtorrent_tag} \
-    bash qbittorrent-nox-static.sh qbittorrent
+#RUN qbitorrent_github_tag=release-${qbitorrent_tag} \
+#    libtorrent_github_tag=${libtorrent_tag} \
+#    bash qbittorrent-nox-static.sh qbittorrent
 
 FROM lsiobase/alpine:3.12
 
@@ -25,7 +25,7 @@ RUN apk add --no-cache python3 && \
     rm -rf /var/cache/apk/*
 
 COPY --chmod=755 root /
-COPY --from=build --chmod=a+x /build/qbt-build/completed/qbittorrent-nox   /usr/local/bin/qbittorrent-nox
+COPY --from=chisbread/qbittorrent:v4.3.9 --chmod=a+x /usr/bin/qbittorrent-nox   /usr/local/bin/qbittorrent-nox
 
 VOLUME /config
 
