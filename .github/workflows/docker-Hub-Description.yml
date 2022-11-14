@@ -3,6 +3,7 @@ name: Docker Hub Description
 on:
   workflow_dispatch:
 
+jobs:
   job:
     name: 更新DockerHub介绍
     runs-on: ubuntu-latest
