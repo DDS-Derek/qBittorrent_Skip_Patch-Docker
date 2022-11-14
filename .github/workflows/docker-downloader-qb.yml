@@ -24,6 +24,10 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=today::$(date +'%Y-%m-%d')"
+
       - 
         name: Buildx
         uses: docker/build-push-action@v3
@@ -34,4 +38,4 @@ jobs:
             linux/amd64
           push: true
           tags: |
-             ${{ secrets.DOCKER_USERNAME }}/qbittorrent_skip_patch:downloader
+             ${{ secrets.DOCKER_USERNAME }}/qbittorrent_skip_patch:downloader-${{ steps.date.outputs.today }}
