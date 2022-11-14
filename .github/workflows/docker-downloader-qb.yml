@@ -1,11 +1,11 @@
-name: Build BASE
+name: Downloader qBittorrent
 
 on:
   workflow_dispatch:
 
 jobs:
   build:
-    name: Build BASE
+    name: Downloader qBittorrent
     runs-on: ubuntu-latest
     steps:
       - 
@@ -28,10 +28,10 @@ jobs:
         name: Buildx
         uses: docker/build-push-action@v3
         with:
-          context: Base
-          file: Base/Dockerfile-build-base
+          context: Downloader
+          file: Downloader/Dockerfile
           platforms: |
             linux/amd64
           push: true
           tags: |
-             ${{ secrets.DOCKER_USERNAME }}/qbittorrent_skip_patch:build_base
+             ${{ secrets.DOCKER_USERNAME }}/qbittorrent_skip_patch:downloader
