@@ -1,5 +1,5 @@
 ##################################
-ARG qbitorrent_tag=4.3.9
+#ARG qbitorrent_tag=4.3.9
 #ARG libtorrent_tag=LPE_v0.4
 ##################################
 
@@ -20,7 +20,11 @@ ARG qbitorrent_tag=4.3.9
 #    libtorrent_github_tag=${libtorrent_tag} \
 #    bash qbittorrent-nox-static.sh qbittorrent
 
+##################################
+ARG qbitorrent_tag=4.3.9
+##################################
+
 FROM nevinee/qbittorrent:${qbitorrent_tag}
 
-COPY --from=chisbread/qbittorrent:v4.3.9 --chmod=a+x /usr/bin/qbittorrent-nox   /usr/bin/qbittorrent-nox
+COPY --from=ddsderek/qbittorrent_skip_patch:downloader-2022-11-14 --chmod=755 /qb/4_3_x_RC_1_2/x86_64-qt5-qbittorrent-nox   /usr/bin/qbittorrent-nox
 # COPY --from=build --chmod=a+x /build/qbt-build/completed/qbittorrent-nox   /usr/bin/qbittorrent-nox

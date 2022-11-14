@@ -11,6 +11,7 @@
 #    libtorrent_github_tag=${libtorrent_tag} \
 #    bash qbittorrent-nox-static.sh qbittorrent
 
+
 FROM lsiobase/alpine:3.12
 
 ENV TZ=Asia/Shanghai \
@@ -25,7 +26,7 @@ RUN apk add --no-cache python3 && \
     rm -rf /var/cache/apk/*
 
 COPY --chmod=755 root /
-COPY --from=chisbread/qbittorrent:v4.3.9 --chmod=a+x /usr/bin/qbittorrent-nox   /usr/local/bin/qbittorrent-nox
+COPY --from=ddsderek/qbittorrent_skip_patch:downloader-2022-11-14 --chmod=755 /qb/4_3_x_RC_1_2/x86_64-qt5-qbittorrent-nox   /usr/local/bin/qbittorrent-nox
 
 VOLUME /config
 
