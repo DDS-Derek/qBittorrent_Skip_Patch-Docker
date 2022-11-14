@@ -21,7 +21,7 @@
 #    bash qbittorrent-nox-static.sh qbittorrent
 
 ##################################
-ARG qbitorrent_tag=4.3.9
+ARG qbitorrent_tag=4.4.5
 ##################################
 
 FROM nevinee/qbittorrent:${qbitorrent_tag}
