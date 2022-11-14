@@ -26,7 +26,7 @@ RUN apk add --no-cache python3 && \
     rm -rf /var/cache/apk/*
 
 COPY --chmod=755 root /
-COPY --from=ddsderek/qbittorrent_skip_patch:downloader-2022-11-14 --chmod=755 /qb/4_3_x_RC_1_2/x86_64-qt5-qbittorrent-nox   /usr/local/bin/qbittorrent-nox
+COPY --from=ddsderek/qbittorrent_skip_patch:downloader-2022-11-14 --chmod=755 /qb/4_2_x_RC_1_2/x86_64-qt5-qbittorrent-nox   /usr/local/bin/qbittorrent-nox
 
 VOLUME /config
 
