@@ -36,6 +36,8 @@ jobs:
           file: Downloader/Dockerfile
           platforms: |
             linux/amd64
+            linux/arm/v7
+            linux/arm64/v8
           push: true
           tags: |
              ${{ secrets.DOCKER_USERNAME }}/qbittorrent_skip_patch:downloader-${{ steps.date.outputs.today }}
