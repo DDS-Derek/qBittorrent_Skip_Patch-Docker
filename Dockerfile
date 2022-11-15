@@ -1,16 +1,17 @@
-#FROM ddsderek/qbittorrent_skip_patch:build_base AS build
+############### Time ###############
+ARG Build_Time=2022-11-14
+####################################
 
-##################################
-#ENV qbitorrent_tag=4.4.5
-#ENV libtorrent_tag=LPE_v0.4
-##################################
+FROM ddsderek/qbittorrent_skip_patch:downloader-${Build_Time} AS Build
 
-#WORKDIR /build
+############### Version ###############
+ENV Qbittorrent=4_4_x
+ENV Libtorrent=RC_1_2
+#######################################
 
-#RUN qbitorrent_github_tag=release-${qbitorrent_tag} \
-#    libtorrent_github_tag=${libtorrent_tag} \
-#    bash qbittorrent-nox-static.sh qbittorrent
+COPY choose.sh .
 
+RUN bash choose.sh
 
 FROM lsiobase/alpine:3.12
 
@@ -26,7 +27,7 @@ RUN apk add --no-cache python3 && \
     rm -rf /var/cache/apk/*
 
 COPY --chmod=755 root /
-COPY --from=ddsderek/qbittorrent_skip_patch:downloader-2022-11-14 --chmod=755 /qb/4_4_x_RC_1_2/x86_64-qbittorrent-nox   /usr/local/bin/qbittorrent-nox
+COPY --from=Build --chmod=755 /qbittorrent-nox   /usr/local/bin/qbittorrent-nox
 
 VOLUME /config
 
