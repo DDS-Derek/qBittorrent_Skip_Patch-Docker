@@ -81,7 +81,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
-          file: Dockerfile.nevinee
+          file: Dockerfile.nevinee.iyuu
           platforms: |
             linux/amd64
             linux/arm/v7
