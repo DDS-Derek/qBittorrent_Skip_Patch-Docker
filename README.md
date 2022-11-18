@@ -67,7 +67,6 @@ services:
       - 8080:8080        # 冒号左右一致，必须同WEBUI_PORT一样，本文件中的3个8080要改一起改
       - 34567:34567      # 冒号左右一致，必须同BT_PORT一样，本文件中的5个34567要改一起改
       - 34567:34567/udp  # 冒号左右一致，必须同BT_PORT一样，本文件中的5个34567要改一起改
-      #- 8787:8787       # 如使用的是nevinee/qbittorrent:iyuu标签，请解除本行注释
     #security_opt:       # armv7设备请解除本行和下一行的注释
       #- seccomp=unconfined
 ```
@@ -96,7 +95,7 @@ services:
       - 8080:8080        # 冒号左右一致，必须同WEBUI_PORT一样，本文件中的3个8080要改一起改
       - 34567:34567      # 冒号左右一致，必须同BT_PORT一样，本文件中的5个34567要改一起改
       - 34567:34567/udp  # 冒号左右一致，必须同BT_PORT一样，本文件中的5个34567要改一起改
-      #- 8787:8787       # 如使用的是nevinee/qbittorrent:iyuu标签，请解除本行注释
+      - 8787:8787        # iyuu Web
     #security_opt:       # armv7设备请解除本行和下一行的注释
       #- seccomp=unconfined
 ```
@@ -115,7 +114,6 @@ services:
       - UMASK_SET=022
       - TL=https://githubraw.sleele.workers.dev/XIU2/TrackersListCollection/master/best.txt
       - UT=true
-      - QB_EE_BIN=false
     volumes:
       - /path/to/appdata/config:/config
       - /path/to/downloads:/downloads
