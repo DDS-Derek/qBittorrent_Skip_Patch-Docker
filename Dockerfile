@@ -1,11 +1,11 @@
 ############### Time ###############
-ARG Build_Time=2022-11-15
+ARG Build_Time=2022-11-30
 ####################################
 
 FROM ddsderek/qbittorrent_skip_patch:downloader-${Build_Time} AS Build
 
 ############### Version ###############
-ENV Qbittorrent=4_4_x
+ENV Qbittorrent=4_5_x
 ENV Libtorrent=RC_1_2
 #######################################
 
