@@ -1,12 +1,12 @@
 #!/bin/bash
 
-mkdir -p /qb/4_5_x_RC_1_2
+mkdir -p /qb/${Qbittorrent}_${Libtorrent}
 
-wget -P /qb/4_5_x_RC_1_2 https://github.com/Ghost-chu/qbittorrent-nox-static/releases/download/manual-4_5_x_RC_1_2-fasthash/aarch64-qbittorrent-nox
-wget -P /qb/4_5_x_RC_1_2 https://github.com/Ghost-chu/qbittorrent-nox-static/releases/download/manual-4_5_x_RC_1_2-fasthash/aarch64-qt5-qbittorrent-nox
-wget -P /qb/4_5_x_RC_1_2 https://github.com/Ghost-chu/qbittorrent-nox-static/releases/download/manual-4_5_x_RC_1_2-fasthash/armhf-qbittorrent-nox
-wget -P /qb/4_5_x_RC_1_2 https://github.com/Ghost-chu/qbittorrent-nox-static/releases/download/manual-4_5_x_RC_1_2-fasthash/armhf-qt5-qbittorrent-nox
-wget -P /qb/4_5_x_RC_1_2 https://github.com/Ghost-chu/qbittorrent-nox-static/releases/download/manual-4_5_x_RC_1_2-fasthash/armv7-qbittorrent-nox
-wget -P /qb/4_5_x_RC_1_2 https://github.com/Ghost-chu/qbittorrent-nox-static/releases/download/manual-4_5_x_RC_1_2-fasthash/armv7-qt5-qbittorrent-nox
-wget -P /qb/4_5_x_RC_1_2 https://github.com/Ghost-chu/qbittorrent-nox-static/releases/download/manual-4_5_x_RC_1_2-fasthash/x86_64-qbittorrent-nox
-wget -P /qb/4_5_x_RC_1_2 https://github.com/Ghost-chu/qbittorrent-nox-static/releases/download/manual-4_5_x_RC_1_2-fasthash/x86_64-qt5-qbittorrent-nox
+architectures=("aarch64" "armhf" "armv7" "x86_64")
+versions=("qbittorrent-nox" "qt5-qbittorrent-nox")
+
+for arch in "${architectures[@]}"; do
+    for ver in "${versions[@]}"; do
+        wget -P /qb/${Qbittorrent}_${Libtorrent} "https://github.com/Ghost-chu/qbittorrent-nox-static/releases/download/manual-${Qbittorrent}_${Libtorrent}-fasthash/${arch}-${ver}"
+    done
+done

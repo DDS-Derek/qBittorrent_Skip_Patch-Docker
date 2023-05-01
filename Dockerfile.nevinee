@@ -1,13 +1,13 @@
 ############### Time ###############
-ARG Build_Time=2023-01-30 
-ARG qbitorrent_tag=4.5.0
+ARG Build_Time
+ARG qbitorrent_tag
 ####################################
 
 FROM ddsderek/qbittorrent_skip_patch:downloader-${Build_Time} AS Build
 
 ############### Version ###############
-ENV Qbittorrent=4_5_x
-ENV Libtorrent=RC_1_2
+ARG Qbittorrent
+ARG Libtorrent
 #######################################
 
 COPY choose.sh .
