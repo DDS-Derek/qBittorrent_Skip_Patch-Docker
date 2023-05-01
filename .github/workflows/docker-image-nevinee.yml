@@ -6,7 +6,7 @@ on:
 
 jobs:
   build1:
-    name: amd64-none
+    name: none
     runs-on: ubuntu-latest
     steps:
       - 
@@ -16,8 +16,11 @@ jobs:
       - name: Set Version
         id: set-version
         run: |
-          echo "::set-output name=version::${GITHUB_REF:10}"
-          echo "ReleaseTag=${GITHUB_REF:10}"
+          echo "version=${GITHUB_REF:10}"
+          echo "Qbittorrent=$(cat versions/Qbittorrent)" >> $GITHUB_OUTPUT
+          echo "Libtorrent=$(cat versions/Libtorrent)" >> $GITHUB_OUTPUT
+          echo "Build_Time=$(cat versions/Build_Time)" >> $GITHUB_OUTPUT
+          echo "qbitorrent_tag=$(cat versions/qbitorrent_tag)" >> $GITHUB_OUTPUT
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
@@ -44,13 +47,16 @@ jobs:
             linux/arm64/v8
           push: true
           build-args: |
-            VERSION=${{ steps.set-version.outputs.version }}
+            Qbittorrent=${{ steps.set-version.outputs.Qbittorrent }}
+            Libtorrent=${{ steps.set-version.outputs.Libtorrent }}
+            Build_Time=${{ steps.set-version.outputs.Build_Time }}
+            qbitorrent_tag=${{ steps.set-version.outputs.qbitorrent_tag }}
           tags: |
              ${{ secrets.DOCKER_USERNAME }}/qbittorrent_skip_patch:${{ steps.set-version.outputs.version }}
              ${{ secrets.DOCKER_USERNAME }}/qbittorrent_skip_patch:latest_nevinee
 
   build2:
-    name: amd64-iyuu
+    name: iyuu
     runs-on: ubuntu-latest
     steps:
       - 
@@ -60,8 +66,11 @@ jobs:
       - name: Set Version
         id: set-version
         run: |
-          echo "::set-output name=version::${GITHUB_REF:10}"
-          echo "ReleaseTag=${GITHUB_REF:10}"
+          echo "version=${GITHUB_REF:10}"
+          echo "Qbittorrent=$(cat versions/Qbittorrent)" >> $GITHUB_OUTPUT
+          echo "Libtorrent=$(cat versions/Libtorrent)" >> $GITHUB_OUTPUT
+          echo "Build_Time=$(cat versions/Build_Time)" >> $GITHUB_OUTPUT
+          echo "qbitorrent_tag=$(cat versions/qbitorrent_tag)-iyuu" >> $GITHUB_OUTPUT
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
@@ -88,7 +97,10 @@ jobs:
             linux/arm64/v8
           push: true
           build-args: |
-            VERSION=${{ steps.set-version.outputs.version }}
+            Qbittorrent=${{ steps.set-version.outputs.Qbittorrent }}
+            Libtorrent=${{ steps.set-version.outputs.Libtorrent }}
+            Build_Time=${{ steps.set-version.outputs.Build_Time }}
+            qbitorrent_tag=${{ steps.set-version.outputs.qbitorrent_tag }}
           tags: |
              ${{ secrets.DOCKER_USERNAME }}/qbittorrent_skip_patch:${{ steps.set-version.outputs.version }}-iyuu
              ${{ secrets.DOCKER_USERNAME }}/qbittorrent_skip_patch:latest_nevinee-iyuu
@@ -100,30 +112,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-
-      - name: Set Version
-        id: set-version
-        run: |
-          echo "::set-output name=version::${GITHUB_REF:10}"
-          echo "ReleaseTag=${GITHUB_REF:10}"
-
-      - name: Set up QEMU
-        id: qemu
-        uses: docker/setup-qemu-action@v2
-        with:
-          platforms: all
-
-      - name: Set up Docker Buildx
-        id: buildx
-        uses: docker/setup-buildx-action@v2
-        with:
-          version: latest
-
-      - name: Login to DockerHub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Docker Hub Description
         if: contains(steps.set-version.outputs.version, 'nevinee')
